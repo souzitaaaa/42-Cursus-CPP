@@ -12,12 +12,9 @@
 #include <cstdlib>
 #include <ctime>
 #include <stdexcept>
-#define RED "\033[1;31m"
-#define GREEN "\033[1;32m"
-#define CYAN "\e[0;36m"
-#define YELLOW "\e[0;33m"
-#define BLACK "\033[0;30m"
-#define RESET "\033[0m"
+
+# include "Exception.hpp"
+# include "Defines.hpp"
 
 class ScalarConverter
 {
@@ -30,6 +27,8 @@ public:
 	ScalarConverter &operator=(const ScalarConverter &cpy);
 	~ScalarConverter();
 
+	static void convert(char *);
+	static int getArgType(char *argument);
 	/*class GradeTooLowException : public std::exception
 	{
 	public:

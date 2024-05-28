@@ -4,7 +4,7 @@ ScalarConverter::ScalarConverter()
 {
 	std::cout << YELLOW << "Default constructor called" << RESET << std::endl;
 }
-
+//TODO oque fazer com o cpy
 ScalarConverter::ScalarConverter(const ScalarConverter &cpy)
 {
 	(void)cpy;
@@ -19,11 +19,18 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &cpy)
 	return *this;
 }
 
-/*
-const char *ScalarConverter::GradeTooHighException::what() const throw()
-{
-	return ("❌ To high of a grade to assign");
-}*/
+int ScalarConverter::getArgType(char *argument) {
+	(void)argument;
+	return 1;
+}
+
+void ScalarConverter::convert(char *argument) {
+	try {
+		int type = ScalarConverter::getArgType(argument);
+	} catch(const std::exception &e) {
+        std::cout << RED << e.what() << RESET << std::endl;
+	}
+}
 
 ScalarConverter::~ScalarConverter()
 {

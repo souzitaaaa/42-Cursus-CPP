@@ -1,6 +1,13 @@
 #include "ScalarConverter.hpp"
 
-int main()
+int main(int av, char **ac)
 {
-    std::cout << "teste" << std::endl;
+    (void)ac;
+    try {
+        if (av > 2 || av == 1)
+            throw Execption(WRONG_ARGS);
+        ScalarConverter::convert(ac[1]);
+    } catch(const std::exception& e){
+        std::cout << RED << e.what() << RESET << std::endl;
+    }
 }
