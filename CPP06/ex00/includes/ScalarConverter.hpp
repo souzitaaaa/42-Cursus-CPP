@@ -15,25 +15,22 @@
 
 # include "Exception.hpp"
 # include "Defines.hpp"
+# include "Libft.hpp"
+
+class Libft;
 
 class ScalarConverter
 {
 
 private:
-
-public:
 	ScalarConverter();
 	ScalarConverter(const ScalarConverter &cpy);
 	ScalarConverter &operator=(const ScalarConverter &cpy);
+
+public:
 	~ScalarConverter();
 
 	static void convert(char *);
-	static int getArgType(char *argument);
-	/*class GradeTooLowException : public std::exception
-	{
-	public:
-		const char *what() const throw();
-	};*/
 };
 
 #endif

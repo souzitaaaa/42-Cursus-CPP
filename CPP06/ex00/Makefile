@@ -22,11 +22,11 @@ NAME 			= converter
 INCLUDE			= includes
 OBJDIR			= obj
 
-_FILES 			= ScalarConverter Exception
+_FILES 			= ScalarConverter Exception Libft
 
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
-_HEADERS		= ScalarConverter.hpp Exception.hpp Defines.hpp
+_HEADERS		= ScalarConverter.hpp Exception.hpp Defines.hpp Libft.hpp
 HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
 
 #---------------------------------  RULES  --------------------------------------

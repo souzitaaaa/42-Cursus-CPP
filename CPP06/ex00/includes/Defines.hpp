@@ -10,6 +10,6 @@
 #define RESET "\033[0m"
 //-------------------------------------  MESSAGES  --------------------------------
 #define WRONG_ARGS "Wrong arguments\n Try: ./[exec] [argument]"
-
+#define WRONG_TYPE "Invalid argument type"
 
 #endif

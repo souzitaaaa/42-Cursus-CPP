@@ -3,14 +3,14 @@
 
 # include <stdexcept>
 
-class Execption: public std::exception {
+class Exception: public std::exception {
     private:
         std::string _msg;
 
     public:
-        explicit Execption(const std::string& msg);
+        explicit Exception(const std::string& msg);
         virtual const char* what() const throw();
-        virtual ~Execption() throw();
+        virtual ~Exception() throw();
 };
 
 #endif

@@ -1,9 +1,11 @@
 #include "ScalarConverter.hpp"
+#include "Libft.hpp"
 
 ScalarConverter::ScalarConverter()
 {
 	std::cout << YELLOW << "Default constructor called" << RESET << std::endl;
 }
+
 //TODO oque fazer com o cpy
 ScalarConverter::ScalarConverter(const ScalarConverter &cpy)
 {
@@ -19,14 +21,13 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &cpy)
 	return *this;
 }
 
-int ScalarConverter::getArgType(char *argument) {
-	(void)argument;
-	return 1;
-}
 
 void ScalarConverter::convert(char *argument) {
 	try {
-		int type = ScalarConverter::getArgType(argument);
+		int type = Libft::getType(argument);
+		std::cout << type << std::endl;
+		if (type == -1)
+            throw Exception(WRONG_TYPE);
 	} catch(const std::exception &e) {
         std::cout << RED << e.what() << RESET << std::endl;
 	}
