@@ -1,9 +1,9 @@
 #ifndef LIBFT_HPP
 #define LIBFT_HPP
 
-#include "ScalarConverter.hpp"
 #include <limits.h>
 #include <float.h>
+#include <Base.hpp>
 
 class Libft
 {
@@ -21,17 +21,6 @@ public:
     static bool isDouble(std::string arg);
     // Aux --------------------------------------------------
     static std::string iterate(std::string str, int *i, char target);
-    
-    
-    
-    
-    // Only for this exercise (remove later) --------------------------------
-    static void convertChar(std::string arg);
-    static void convertInt(std::string arg);
-    static void convertFloat(std::string arg);
-    static void convertDouble(std::string arg);
-    static void convertInf(std::string arg);
-    static void convertNan(std::string arg);
 };
 
 #endif

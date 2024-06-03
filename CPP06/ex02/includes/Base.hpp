@@ -1,5 +1,5 @@
-#ifndef SCALARCONVERTER_HPP
-#define SCALARCONVERTER_HPP
+#ifndef BASE_HPP
+#define BASE_HPP
 
 #include <iostream>
 #include <string>
@@ -20,18 +20,24 @@
 
 class Libft;
 
-class ScalarConverter
+class Base
 {
 
 private:
-	ScalarConverter();
-	ScalarConverter(const ScalarConverter &cpy);
-	ScalarConverter &operator=(const ScalarConverter &cpy);
 
 public:
-	~ScalarConverter();
+	virtual ~Base();
 
-	static void convert(char *);
 };
+
+class A : public Base {};
+class B : public Base {};
+class C : public Base {};
+class D : public Base {};
+
+Base *generate(void);
+void identify(Base *p);
+void identify(Base &p);
+std::ostream &operator<<(std::ostream &out, const Base &cpy);
 
 #endif

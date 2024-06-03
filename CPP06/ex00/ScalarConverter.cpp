@@ -10,7 +10,7 @@ ScalarConverter::ScalarConverter()
 ScalarConverter::ScalarConverter(const ScalarConverter &cpy)
 {
 	(void)cpy;
-	std::cout << YELLOW << "Copy Buconstructor called" << RESET << std::endl;
+	std::cout << YELLOW << "Copy constructor called" << RESET << std::endl;
 }
 
 ScalarConverter &ScalarConverter::operator=(const ScalarConverter &cpy)
@@ -25,9 +25,12 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &cpy)
 void ScalarConverter::convert(char *argument) {
 	try {
 		int type = Libft::getType(argument);
-		std::cout << type << std::endl;
 		if (type == -1)
             throw Exception(WRONG_TYPE);
+    	void (*f[])(std::string) = {&Libft::convertChar, &Libft::convertInt,
+									&Libft::convertFloat, &Libft::convertDouble,
+									&Libft::convertInf, &Libft::convertNan};
+        f[type](argument);
 	} catch(const std::exception &e) {
         std::cout << RED << e.what() << RESET << std::endl;
 	}
