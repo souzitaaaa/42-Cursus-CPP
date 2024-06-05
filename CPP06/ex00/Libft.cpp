@@ -9,10 +9,9 @@ Libft::Libft() {}
 int Libft::getType(std::string arg) {
     if (arg.empty())
         return -1;
-    if (!arg.compare("-inff") || !arg.compare("+inff")
-        || !arg.compare("-inf") || !arg.compare("+inf"))
+    if (!arg.compare("-inff") || !arg.compare("+inff") || !arg.compare("nanf"))
         return 4;
-    if (!arg.compare("nan"))
+    if (!arg.compare("nan") || !arg.compare("-inf") || !arg.compare("+inf"))
         return 5;
     bool out = false;
     bool (*f[])(std::string) = {&isChar, &isInt, &isFloat, &isDouble};
@@ -165,18 +164,15 @@ void Libft::convertDouble(std::string arg) {
     std::cout << "DOUBLE:\t" << std::fixed << number <<  std::endl;
 }
 
-void Libft::convertInf(std::string arg) {
+void Libft::convertPseudoFloat(std::string arg) {
     std::cout << YELLOW << "|\tLiteral Conversion\t|" << RESET << std::endl;
     std::cout << "CHAR:\t" <<  "Impossible" << std::endl;
     std::cout << "INT:\t" <<  "Impossible" <<  std::endl;
-    std::cout << "FLOAT:\t" <<  std::fixed <<  arg;
-    arg[arg.length() - 1] == 'f' && arg[arg.length() - 2] == 'f'
-        ? std::cout << std::endl
-        : std::cout << 'f' << std::endl;
-    std::cout << "DOUBLE:\t" <<  std::fixed <<  arg <<  std::endl;
+    std::cout << "FLOAT:\t" <<  std::fixed <<  arg << std::endl;
+    std::cout << "DOUBLE:\t" <<  std::fixed <<  arg.erase(arg.size() - 1) <<  std::endl;
 }
 
-void Libft::convertNan(std::string arg) {
+void Libft::convertPseudoDouble(std::string arg) {
     std::cout << YELLOW << "|\tNan Conversion\t\t|" << RESET << std::endl;
     std::cout << "CHAR:\t" <<  "Impossible" << std::endl;
     std::cout << "INT:\t" <<  "Impossible" <<  std::endl;

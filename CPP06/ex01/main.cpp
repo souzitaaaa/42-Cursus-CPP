@@ -20,7 +20,7 @@ int main()
         b = Serializer::deserialize(a_ptr);
         std::cout << YELLOW << "Deserializer return: \n" << RESET;
         std::cout << *b << std::endl;
-        //b = new Data(); To enter in the exception
+        //b = new Data();
         &a == b
             ? std::cout << GREEN <<  "Serialization and deserialization succeeded!" << RESET << std::endl
             : throw Exception(BAD_SERIALIZATION);

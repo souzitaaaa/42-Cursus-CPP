@@ -29,7 +29,7 @@ void ScalarConverter::convert(char *argument) {
             throw Exception(WRONG_TYPE);
     	void (*f[])(std::string) = {&Libft::convertChar, &Libft::convertInt,
 									&Libft::convertFloat, &Libft::convertDouble,
-									&Libft::convertInf, &Libft::convertNan};
+									&Libft::convertPseudoFloat, &Libft::convertPseudoDouble};
         f[type](argument);
 	} catch(const std::exception &e) {
         std::cout << RED << e.what() << RESET << std::endl;

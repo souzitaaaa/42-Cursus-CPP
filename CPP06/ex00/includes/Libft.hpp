@@ -30,8 +30,8 @@ public:
     static void convertInt(std::string arg);
     static void convertFloat(std::string arg);
     static void convertDouble(std::string arg);
-    static void convertInf(std::string arg);
-    static void convertNan(std::string arg);
+    static void convertPseudoFloat(std::string arg);
+    static void convertPseudoDouble(std::string arg);
 };
 
 #endif
