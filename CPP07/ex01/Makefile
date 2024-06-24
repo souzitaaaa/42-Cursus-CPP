@@ -11,14 +11,28 @@ WHITE 			= \033[1;37m
 
 #----------------------------------- COMMANDS ----------------------------------
 CC				= c++
-RM 				= rm -rf
+RM				= rm -rf
+
+ifeq ($(OS),Windows_NT)
+	DETECT_OS = Windows
+	MKDIR = mkdir
+	RM = del /Q /S
+	FIX_PATH = $(subst /,\,$1)
+	EXEC_EXT = .exe
+else
+	DETECT_OS = Linux
+	MKDIR = mkdir -p
+	RM = rm -rf
+	FIX_PATH = $1
+	EXEC_EXT = 
+endif
 
 #-----------------------------------  FLAGS  -----------------------------------
 CFLAGS			= -Wall -Wextra -Werror -std=c++98
 NPD				= --no-print-directory
 
 #--------------------------------- FILES  ---------------------------------------
-NAME 			= iter
+NAME 			= iter$(EXEC_EXT)
 INCLUDE			= includes
 OBJDIR			= obj
 
@@ -27,7 +41,7 @@ _FILES 			=
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
 _HEADERS		= iter.hpp
-HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
+HDR				= $(call FIX_PATH,$(addprefix $(INCLUDE)/, $(_HEADERS)))
 
 #---------------------------------  RULES  --------------------------------------
 
@@ -42,15 +56,15 @@ $(OBJDIR)/%.o : %.cpp $(HDR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE)
 
 $(OBJDIR):
-	mkdir -p $(OBJDIR)
+	$(MKDIR) $(OBJDIR)
 
 clean:
-	$(RM) $(OBJDIR)
+	$(RM) $(call FIX_PATH,$(OBJDIR))
 	echo "[$(RED)Deleting$(RESET)]  object files deleted$(BOLD)$(RESET)"
 
 fclean: clean
-	$(RM) $(NAME)
-	echo "[$(RED)Deleting$(RESET)]  .a deleted$(BOLD)"
+	$(RM) $(call FIX_PATH,$(NAME))
+	echo "[$(RED)Deleting$(RESET)]  executable deleted$(BOLD)$(RESET)"
 
 re: fclean all
 
