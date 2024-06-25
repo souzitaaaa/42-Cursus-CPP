@@ -7,13 +7,13 @@ A brief explanation and demonstration of some methods used by containers in C++9
 
 We are going to assume that the base container will be this:
 
-```c++
+```c
 int arr[] = {1, 2, 3, 4, 5};
 std::vector<int> vec;
 ```
 ### .empty()
 Returns ``true`` if the vector is empty and ``false`` otherwise
-```c++
+```c
 vec.empty()
     ? std::cout << "Vector is empty" << std::endl
     : std::cout << "Vector is not empty" << std::endl;
@@ -23,7 +23,7 @@ vec.empty()
 
 ### .assign()
 To ``assign values`` from a array to the vector
-```c++
+```c
 vec.assign(arr, arr + sizeof(arr) / sizeof(int));
 vec.empty()
     ? std::cout << "Vector is empty" << std::endl
@@ -34,7 +34,7 @@ vec.empty()
 
 ### .size()
 Returns the ``number`` of elements in the vector
-```c++
+```c
 std::cout << "Vector size: " << vec.size() << std::endl;
 //output:
     Vector size: 5
@@ -44,7 +44,7 @@ std::cout << "Vector size: " << vec.size() << std::endl;
 Returns a ``reference`` to the element at the position ``n`` in the vector with bounds checking
 
 Throws ``std::out_of_range`` expection if ``n`` is out of bounds
-```c++
+```c
 std::cout << "Element at index 2: " << vec.at(2) << std::endl;
 //output:
     Element at index 2: 3
@@ -53,7 +53,7 @@ std::cout << "Element at index 2: " << vec.at(2) << std::endl;
 ### .front()  && .back()
 Returns a ``reference`` to the ``first`` element in the vector and to the ``last`` respectively
 
-```c++
+```c
 std::cout << "First element: " << vec.front() << std::endl;
 std::cout << "Last element: " << vec.back() << std::endl;
 //output:
@@ -66,7 +66,7 @@ The ``capacity()`` returns the ``size`` of the storage space currently allocated
 
 The ``reserve(x)`` requests that the vector capacity be at least enough to contain ``n`` elements
 
-```c++
+```c
 std::cout << "Capacity: " << vec.capacity() << std::endl;
 vec.reserve(10);
 std::cout << "Capacity after reserve: " << vec.capacity() << std::endl;
@@ -79,7 +79,7 @@ std::cout << "Size after reserve: " << vec.size() << std::endl;
 
 ### .clear()
 Removes ``all`` elements from the vector
-```c++
+```c
 vec.clear();
 vec.empty()
     ? std::cout << "Vector is empty" << std::endl
@@ -90,7 +90,7 @@ vec.empty()
 
 ### .insert(i, val)  && .erase(i)
 Inserts ``val`` before the element at position ``i`` and removes the element at position ``i`` respectively
-```c++
+```c
 std::cout << "First element: " << vec.front() << std::endl;
 vec.insert(vec.begin(), 0);
 std::cout << "First element after insert: " << vec.front() << std::endl;
@@ -108,7 +108,7 @@ std::cout << "Vector size: " << vec.size() << std::endl;
 
 ### .push_back(val); .pop_back()
 Adds a new element ``val`` at the ``end`` of the vector, increasing its size by one and removes the ``last`` element from the vector reducing its size by one respectively
-```c++
+```c
 std::cout << "Last element: " << vec.back() << std::endl;
 vec.push_back(6);
 std::cout << "Last element before push_back: " << vec.back() << std::endl;
@@ -126,7 +126,7 @@ std::cout << "Vector size: " << vec.size() << std::endl;
 
 ### .resize(x)
 Resizes the container to contain ``n`` elements
-```c++
+```c
 std::cout << "Last element: " << vec.back() << std::endl;
 vec.resize(4);
 std::cout << "Last element after resize smaller: " << vec.back() << std::endl;
@@ -146,7 +146,7 @@ vec.pop_back();
 
 ### .swap(cpy)
 Swaps the contents of the vector with those of cpy
-```c++
+```c
 int arr2[] = {5, 4, 3, 2, 1};
 std::vector<int> vec2(arr2, arr2 + sizeof(arr2) / sizeof(int));
 std::cout << "Last element: " << vec.back() << std::endl;
@@ -163,7 +163,7 @@ Takes two iterators that ``define the range`` to search in the container
 If the value is ``found`` within the range, std::find() retuns an iterator pointing to the first occurence of the ``value``
 
 If the value is ``not found`` it returns the iterator ``end``, allowing us to compare the it to the vec.end() to understand if the value was found
-```c++
+```c
 std::vector<int>::iterator it = std::find(vec.begin(), vec.end(), vec.at(2));
 it != vec.end()
     ? std::cout << "Found: " << *it << std::endl
