@@ -71,6 +71,12 @@ public:
 			throw IndexOutBonds();
 		return (this->_arr[i]);
 	}
+	const T &operator[](unsigned int i) const
+	{
+		if (i >= this->_arrSize)
+			throw IndexOutBonds();
+		return (this->_arr[i]);
+	}
 	unsigned int size()
 	{
 		return this->_arrSize;
