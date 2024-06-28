@@ -55,13 +55,17 @@ int main()
     }
     std::cout << CYAN << "[ Add Number by Iterator ]" << RESET << std::endl;
     {
-        int arr[] = {2, 3, 4};
+        int arr[] = {2, 3, 4, 5};
         std::vector<int> vec;
         vec.assign(arr, arr + sizeof(arr) / sizeof(int));
-        Span a = Span(5);
+        Span a = Span(10);
         a.addNumber(1);
         std::cout << a << std::endl;
-        a.addNumber(vec.begin(), vec.end());
+        try {
+            a.addNumber(vec.begin(), vec.end());
+        } catch (std::exception &e) {
+            std::cout << e.what() << std::endl;
+        }
         std::cout << a << std::endl;
     }
     std::cout << CYAN << "[ Subject ]" << RESET << std::endl;
