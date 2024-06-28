@@ -69,8 +69,24 @@ int main()
         std::cout << "Iterator --:    " << *it << std::endl;
         while (it != ite)
         {
-            std::cout << *it << std::endl;
+            std::cout << *it << " ";
             ++it;
         }
+        std::cout << std::endl;
+        for (MutantStack<int>::const_iterator cit = a.begin(); cit != a.end(); ++cit)
+        {
+            std::cout << *cit << " ";
+        }
+        std::cout << std::endl;
+        for (MutantStack<int>::reverse_iterator rit = a.rbegin(); rit != a.rend(); ++rit)
+        {
+            std::cout << *rit << " ";
+        }
+        std::cout << std::endl;
+        for (MutantStack<int>::const_reverse_iterator crit = a.rbegin(); crit != a.rend(); ++crit)
+        {
+            std::cout << *crit << " ";
+        }
+        std::cout << std::endl;
     }
 }

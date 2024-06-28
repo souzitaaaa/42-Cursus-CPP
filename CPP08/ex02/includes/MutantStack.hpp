@@ -55,15 +55,15 @@ public:
 	typedef typename C::iterator iterator;
 	iterator begin() { return this->c.begin(); }
 	iterator end() { return this->c.end(); }
-	typedef typename C::iterator const_iterator;
+	typedef typename C::const_iterator const_iterator;
 	const_iterator begin() const { return this->c.begin(); }
 	const_iterator end() const { return this->c.end(); }
-	typedef typename C::iterator riterator;
-	riterator begin() { return this->c.rbegin(); }
-	riterator end() { return this->c.rend(); }
-	typedef typename C::iterator const_riterator;
-	const_riterator begin() const { return this->c.rbegin(); }
-	const_riterator end() const { return this->c.rend(); }
+	typedef typename C::reverse_iterator reverse_iterator;
+	reverse_iterator rbegin() { return this->c.rbegin(); }
+	reverse_iterator rend() { return this->c.rend(); }
+	typedef typename C::const_reverse_iterator const_reverse_iterator;
+	const_reverse_iterator rbegin() const { return this->c.rbegin(); }
+	const_reverse_iterator rend() const { return this->c.rend(); }
 };
 
 template <typename T>
