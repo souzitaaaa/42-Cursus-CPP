@@ -33,17 +33,18 @@
 class RPN
 {
 private:
-    std::stack<int> _stack;
+	std::stack<int> _stack;
 
 public:
 	RPN();
 	RPN(const RPN &cpy);
 	~RPN();
 	RPN &operator=(const RPN &cpy);
-	
+
 	void calc(std::string equation);
 	bool isoperator(int token);
 	void operation(int token);
+	void operationStack(int token);
 
 	class RPNException : public std::exception
 	{
