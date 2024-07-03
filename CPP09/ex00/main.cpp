@@ -8,7 +8,7 @@ bool checkYear(std::string token, int &year)
             return true;
     }
     int aux = std::atoi(token.c_str());
-    if (!(aux >= 2009 && aux <= 2024))
+    if (!(aux >= 2009 && aux <= 2022))
         return true;
     year = aux;
     return false;
