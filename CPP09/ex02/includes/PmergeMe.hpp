@@ -24,6 +24,7 @@
 #include <limits.h>
 #include <float.h>
 #include <ctime>
+#include <utility>
 #define RED "\033[1;31m"
 #define GREEN "\033[1;32m"
 #define CYAN "\e[0;36m"
@@ -48,6 +49,8 @@ public:
 	PmergeMe &operator=(const PmergeMe &cpy);
 
 	void vecsort();
+	void initDoubleVec(std::vector<std::pair<int, int> > *doubleVec);
+	void printDoubleVec(const std::vector<std::pair<int, int> > &dVec);
 
 	class PmergeMeException : public std::exception
 	{
@@ -71,7 +74,7 @@ void printC(const T &container)
 		std::copy(container.begin(), container.end(), std::ostream_iterator<ValueType>(std::cout, " | "));
 		std::cout << std::endl;
 	}
-}
+};
 
 class NotNumberException : public std::exception
 {
