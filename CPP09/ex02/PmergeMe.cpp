@@ -26,6 +26,10 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &cpy)
     return *this;
 }
 
+void PmergeMe::vecsort() {
+    
+}
+
 PmergeMe::PmergeMeException::PmergeMeException(const std::string &message) : _message(message) {}
 
 const char *PmergeMe::PmergeMeException::what() const throw()

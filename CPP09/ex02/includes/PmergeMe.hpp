@@ -36,9 +36,9 @@
 class PmergeMe
 {
 private:
-	int _nArgs;
 	std::vector<int> _vec;
 	std::list<int> _lst;
+	int _nArgs;
 
 public:
 	PmergeMe();
@@ -46,6 +46,8 @@ public:
 	PmergeMe(const PmergeMe &cpy);
 	~PmergeMe();
 	PmergeMe &operator=(const PmergeMe &cpy);
+
+	void vecsort();
 
 	class PmergeMeException : public std::exception
 	{
