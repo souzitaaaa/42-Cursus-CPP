@@ -26,103 +26,80 @@ bool RPN::isoperator(int token)
     return false;
 }
 
-void RPN::operationStack(int token)
-{
-    int temp, temp2;
-    switch (token)
-    {
-    case '+':
-        temp = this->_stack.top();
-        this->_stack.pop();
-        temp2 = this->_stack.top();
-        this->_stack.pop();
-        this->_stack.push(temp2 + temp);
-        break;
-    case '-':
-        temp = this->_stack.top();
-        this->_stack.pop();
-        temp2 = this->_stack.top();
-        this->_stack.pop();
-        this->_stack.push(temp2 - temp);
-        break;
-    case '*':
-        temp = this->_stack.top();
-        this->_stack.pop();
-        temp2 = this->_stack.top();
-        this->_stack.pop();
-        this->_stack.push(temp2 * temp);
-        break;
-    case '/':
-        temp = this->_stack.top();
-        this->_stack.pop();
-        temp2 = this->_stack.top();
-        this->_stack.pop();
-        this->_stack.push(temp2 / temp);
-        break;
-    }
-}
-
 void RPN::operation(int token)
 {
-    std::stack<int> tempStack;
-    while (!this->_stack.empty())
-    {
-        tempStack.push(this->_stack.top());
-        this->_stack.pop();
-    }
-    int temp;
+    float second = this->_stack.top();
+    this->_stack.pop();
+    float first = this->_stack.top();
+    this->_stack.pop();
     switch (token)
     {
     case '+':
-        temp = tempStack.top();
-        tempStack.pop();
-        this->_stack.push(temp + tempStack.top());
+        this->_result = first + second;
+        this->_stack.push(this->_result);
         break;
     case '-':
-        temp = tempStack.top();
-        tempStack.pop();
-        this->_stack.push(temp - tempStack.top());
+        this->_result = first - second;
+        this->_stack.push(this->_result);
         break;
     case '*':
-        temp = tempStack.top();
-        tempStack.pop();
-        this->_stack.push(temp * tempStack.top());
+        this->_result = first * second;
+        this->_stack.push(this->_result);
         break;
     case '/':
-        temp = tempStack.top();
-        tempStack.pop();
-        this->_stack.push(temp / tempStack.top());
+        second == 0
+            ? throw RPNException("Error: Can't do division by zero")
+            : this->_result = first / second;
+        this->_stack.push(this->_result);
         break;
+    default:
+        throw RPNException("Error: Unexpected Error");
     }
 }
 
-void RPN::calc(std::string equation)
+void RPN::init_queue(std::string equation)
 {
     std::istringstream eq(equation);
     std::string token;
     while (std::getline(eq, token, ' '))
     {
+        if (token.length() > 1)
+            throw RPNException("Error: Expression may only include digits and valid operators");
         if (isdigit(token[0]))
-        {
-            int aux = std::atoi(token.c_str());
-            this->_stack.push(aux);
-            if (this->_stack.size() > 2)
-            {
-                if (std::getline(eq, token, ' '))
-                    operationStack(token[0]);
-                else
-                    throw RPNException("Error: Invalid token in operation");
-            }
-        }
+            this->_queue.push(std::atoi(token.c_str()));
+        else if (isoperator(token[0]))
+            this->_queue.push(token[0]);
         else
-        {
-            if (isoperator(token[0]))
-                operation(token[0]);
-            else
-                throw RPNException("Error: Invalid token in operation");
-        }
+            throw RPNException("Error: Expression may only include digits and valid operators");
     }
-    printStack(this->_stack);
+}
+
+void RPN::calc(std::string equation)
+{
+    init_queue(equation);
+    if (this->_queue.size() < 3)
+        throw RPNException("Error: Expression must have at least 3 arguments");
+    for (int i = 0; i < 2; i++)
+    {
+        if (this->_queue.front() > 10)
+            throw RPNException("Error: The first two elements of the expression must be digits");
+        else
+            this->_stack.push(this->_queue.front());
+        this->_queue.pop();
+    }
+    while (!this->_queue.empty())
+    {
+        if (this->_queue.front() < 10)
+            this->_stack.push(this->_queue.front());
+        else
+            this->_stack.empty()
+                ? throw RPNException("Error: Invalid expression")
+                : operation(this->_queue.front());
+        this->_queue.pop();
+    }
+    this->_stack.size() > 1
+        ? throw RPNException("Error: Expression needs more operators")
+        : std::cout << "[ " << this->_result << " ]" << std::endl;
 }
 
 RPN::RPNException::RPNException(const std::string &message) : _message(message) {}

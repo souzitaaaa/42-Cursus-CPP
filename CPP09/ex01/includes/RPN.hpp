@@ -18,6 +18,7 @@
 #include <stack>
 #include <deque>
 #include <list>
+#include <queue>
 #include <sstream>
 #include <limits.h>
 #include <float.h>
@@ -33,7 +34,9 @@
 class RPN
 {
 private:
-	std::stack<int> _stack;
+	float _result;
+	std::queue<int> _queue;
+	std::stack<float> _stack;
 
 public:
 	RPN();
@@ -42,6 +45,7 @@ public:
 	RPN &operator=(const RPN &cpy);
 
 	void calc(std::string equation);
+	void init_queue(std::string equation);
 	bool isoperator(int token);
 	void operation(int token);
 	void operationStack(int token);
@@ -61,25 +65,25 @@ public:
 template <typename T>
 void printStack(std::stack<T> stack)
 {
-	std::stack<T> tempStack;
-	std::stack<T> reverseStack;
+	std::stack<T> s = stack;
+	while (!s.empty())
+	{
+		std::cout << "| " << s.top() << " |";
+		s.pop();
+	}
+	std::cout << '\n';
+}
 
-	while (!stack.empty())
+template <typename T>
+void printQueue(std::queue<T> queue)
+{
+	std::queue<T> q = queue;
+	while (!q.empty())
 	{
-		reverseStack.push(stack.top());
-		stack.pop();
+		std::cout << "| " << q.front() << " |";
+		q.pop();
 	}
-	while (!reverseStack.empty())
-	{
-		tempStack.push(reverseStack.top());
-		reverseStack.pop();
-	}
-	while (!tempStack.empty())
-	{
-		std::cout << "| " << tempStack.top() << " | ";
-		tempStack.pop();
-	}
-	std::cout << std::endl;
+	std::cout << '\n';
 }
 
 #endif
