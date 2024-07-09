@@ -25,6 +25,8 @@
 #include <float.h>
 #include <ctime>
 #include <utility>
+#include <sys/time.h>
+#include <cstdlib>
 #define RED "\033[1;31m"
 #define GREEN "\033[1;32m"
 #define CYAN "\e[0;36m"
@@ -38,7 +40,7 @@ class PmergeMe
 {
 private:
 	std::vector<int> _vec;
-	std::list<int> _lst;
+	std::deque<int> _dque;
 	int _nArgs;
 	int _oddArgVal;
 
@@ -53,9 +55,16 @@ public:
 	void initDoubleVec(std::vector<std::pair<int, int> > *doubleVec);
 	void printDoubleVec(const std::vector<std::pair<int, int> > &dVec);
 	void sortDoubleVecRecursive(std::vector<std::pair<int, int> > *doubleVec, int vecSize);
-	void insertSorted(std::vector<std::pair<int, int> > *doubleVec);
+	void insertSortedVec(std::vector<std::pair<int, int> > *doubleVec);
+	void dquesort();
+	void initDoubleDeque(std::deque<std::pair<int, int> > *doubleDeque);
+	void printDoubleDeque(const std::deque<std::pair<int, int> > &dQue);
+	void sortDoubleDqueRecursive(std::deque<std::pair<int, int> > *doubleDeque, int dqueSize);
+	void insertSortedDque(std::deque<std::pair<int, int> > *doubleDeque);
+
 	int  get_jacobsthalN(int n);
 	std::vector<int> getVec();
+	std::deque<int> getDque();
 
 
 	class PmergeMeException : public std::exception

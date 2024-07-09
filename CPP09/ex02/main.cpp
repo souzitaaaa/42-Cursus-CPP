@@ -1,5 +1,12 @@
 #include "PmergeMe.hpp"
 
+long long currTime()
+{
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return tv.tv_sec * 1000000LL + tv.tv_usec;
+}
+
 bool isNumber(std::string token)
 {
     if (token.empty())
@@ -51,13 +58,20 @@ int main(int argc, char **argv)
             PmergeMe PmM(arguments);
             std::cout << YELLOW << "Unsorted: " << RESET;
             printC(arguments);
-            clock_t begin = clock();
+            long long begin = currTime();
             PmM.vecsort();
-            clock_t end = clock();
-            std::cout << YELLOW << "Sorted: " << RESET;
+            long long end = currTime();
+            std::cout << YELLOW << "Sorted with vector: " << RESET;
             printC(PmM.getVec());
-            std::cout << "Time to process a range of " << YELLOW << argc - 1  << RESET << " elements with std::vector : ";
-            std::cout << GREEN << ((static_cast<double>(end - begin) / CLOCKS_PER_SEC) * 1000) << RESET << " us\n";
+            std::cout << "Time to process a range of " << YELLOW << argc - 1 << RESET << " elements with std::vector: ";
+            std::cout << GREEN << static_cast<double>(end - begin) / 1000 << RESET << " ms\n";
+            begin = currTime();
+            PmM.dquesort();
+            end = currTime();
+            std::cout << YELLOW << "Sorted with deque:  " << RESET;
+            printC(PmM.getDque());
+            std::cout << "Time to process a range of " << YELLOW << argc - 1 << RESET << " elements with std::deque: ";
+            std::cout << GREEN << static_cast<double>(end - begin) / 1000 << RESET << " ms\n";
         }
         catch (const std::exception &e)
         {
