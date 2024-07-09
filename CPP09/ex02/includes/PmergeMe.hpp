@@ -40,6 +40,7 @@ private:
 	std::vector<int> _vec;
 	std::list<int> _lst;
 	int _nArgs;
+	int _oddArgVal;
 
 public:
 	PmergeMe();
@@ -51,6 +52,11 @@ public:
 	void vecsort();
 	void initDoubleVec(std::vector<std::pair<int, int> > *doubleVec);
 	void printDoubleVec(const std::vector<std::pair<int, int> > &dVec);
+	void sortDoubleVecRecursive(std::vector<std::pair<int, int> > *doubleVec, int vecSize);
+	void insertSorted(std::vector<std::pair<int, int> > *doubleVec);
+	int  get_jacobsthalN(int n);
+	std::vector<int> getVec();
+
 
 	class PmergeMeException : public std::exception
 	{

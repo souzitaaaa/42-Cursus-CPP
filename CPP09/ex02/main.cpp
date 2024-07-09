@@ -49,11 +49,13 @@ int main(int argc, char **argv)
             std::vector<int> arguments;
             check_input(&arguments, argc, argv);
             PmergeMe PmM(arguments);
-            std::cout << YELLOW << "Before: " << RESET;
+            std::cout << YELLOW << "Unsorted: " << RESET;
             printC(arguments);
             clock_t begin = clock();
             PmM.vecsort();
             clock_t end = clock();
+            std::cout << YELLOW << "Sorted: " << RESET;
+            printC(PmM.getVec());
             std::cout << "Time to process a range of " << YELLOW << argc - 1  << RESET << " elements with std::vector : ";
             std::cout << GREEN << ((static_cast<double>(end - begin) / CLOCKS_PER_SEC) * 1000) << RESET << " us\n";
         }
