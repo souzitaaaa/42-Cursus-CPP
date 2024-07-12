@@ -132,6 +132,7 @@ void PmergeMe::insertSortedVec(std::vector<std::pair<int, int> > *doubleVec)
                 int numberToInsert = (*doubleVec)[j + oldDist].second;
                 int vecSize = this->_vec.size();
                 // Iteration from the vector to get the size
+                // Mudar a logica para usar o lower_bound e o binary search
                 for (int l = 0; l < vecSize; l++) {
                     if (numberToInsert < this->_vec[l]) {
                         this->_vec.insert(this->_vec.begin() + l, numberToInsert);
