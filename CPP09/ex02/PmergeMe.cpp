@@ -130,17 +130,8 @@ void PmergeMe::insertSortedVec(std::vector<std::pair<int, int> > *doubleVec)
         for (size_t j = 0 + dist; j > 0; j--) {
             if (j + oldDist < (*doubleVec).size()) {
                 int numberToInsert = (*doubleVec)[j + oldDist].second;
-                int vecSize = this->_vec.size();
-                // Iteration from the vector to get the size
-                // Mudar a logica para usar o lower_bound e o binary search
-                for (int l = 0; l < vecSize; l++) {
-                    if (numberToInsert < this->_vec[l]) {
-                        this->_vec.insert(this->_vec.begin() + l, numberToInsert);
-                        l = vecSize;
-                    } else if (l + 1 == vecSize) {
-                        this->_vec.insert(this->_vec.begin() + l + 1, numberToInsert);
-                    }
-                }
+                std::vector<int>::iterator it = std::lower_bound(this->_vec.begin(), this->_vec.end(), numberToInsert);
+                this->_vec.insert(it, numberToInsert);
             }
         }
         oldDist = dist;
@@ -172,16 +163,8 @@ void PmergeMe::insertSortedDque(std::deque<std::pair<int, int> > *doubleDeque)
         for (size_t j = 0 + dist; j > 0; j--) {
             if (j + oldDist < (*doubleDeque).size()) {
                 int numberToInsert = (*doubleDeque)[j + oldDist].second;
-                int dqueSize = this->_dque.size();
-                // Iteration from the vector to get the size
-                for (int l = 0; l < dqueSize; l++) {
-                    if (numberToInsert < this->_dque[l]) {
-                        this->_dque.insert(this->_dque.begin() + l, numberToInsert);
-                        l = dqueSize;
-                    } else if (l + 1 == dqueSize) {
-                        this->_dque.insert(this->_dque.begin() + l + 1, numberToInsert);
-                    }
-                }
+                 std::deque<int>::iterator it = std::lower_bound(this->_dque.begin(), this->_dque.end(), numberToInsert);
+                this->_dque.insert(it, numberToInsert);
             }
         }
         oldDist = dist;
