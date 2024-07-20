@@ -60,7 +60,7 @@ class InputFileError : public std::exception
 public:
 	virtual const char *what() const throw()
 	{
-		return ("Error: could not open file");
+		return ("Error: could not open file\n");
 	}
 };
 
@@ -69,7 +69,7 @@ class InputFileHeaderError : public std::exception
 public:
 	virtual const char *what() const throw()
 	{
-		return ("Error on input file header");
+		return ("Error on input file header\n");
 	}
 };
 

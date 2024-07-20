@@ -8,7 +8,7 @@ bool checkYear(std::string token, int &year)
             return true;
     }
     int aux = std::atoi(token.c_str());
-    if (!(aux >= 2009 && aux <= 2022))
+    if (!(aux >= 2009))
         return true;
     year = aux;
     return false;
@@ -229,7 +229,7 @@ int main(int argc, char **argv)
             BitcoinExchange btc;
             std::string line;
             std::ifstream inputF(argv[1]);
-            if (!inputF)
+            if (!inputF || (inputF.peek() == std::ifstream::traits_type::eof()))
                 throw InputFileError();
 
             for (int i = 0; std::getline(inputF, line); i++)

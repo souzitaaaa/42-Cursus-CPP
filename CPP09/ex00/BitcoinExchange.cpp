@@ -54,15 +54,10 @@ void BitcoinExchange::printExchangeRate(const std::string date) const
 
 float BitcoinExchange::getValue(std::string key, std::string n_btc)
 {
-    std::map<std::string, float>::const_iterator it = _db.lower_bound(key);
-    if (it != _db.end())
-    {
-        --it;
-        float exc_r = it->second;
-        return (std::atof(n_btc.c_str()) * exc_r);
-    }
-    else
-        return 0;
+    std::map<std::string, float>::const_iterator it = _db.upper_bound(key);
+    if(it == _db.begin())
+        return it->second * std::atof(n_btc.c_str());
+    return (--it)->second * std::atof(n_btc.c_str());
 }
 
 BitcoinExchange::BitcoinExchangeException::BitcoinExchangeException(const std::string &message) : _message(message) {}
