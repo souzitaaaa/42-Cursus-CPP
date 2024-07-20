@@ -131,7 +131,7 @@ void PmergeMe::insertSortedVec(std::vector<std::pair<int, int> > *doubleVec)
         for (int j = dist; j > 0; j--) {
             lastStartingIndex = dist + oldDist;
             int indexToInsert = j + oldDist;
-            if (j + oldDist < static_cast<int>((*doubleVec).size() - 1)){
+            if (j + oldDist < static_cast<int>((*doubleVec).size())){
                 int numberToInsert = (*doubleVec)[indexToInsert].second;
                 std::vector<int>::iterator it = std::lower_bound(this->_vec.begin(), this->_vec.end(), numberToInsert);
                 this->_vec.insert(it, numberToInsert);
@@ -167,7 +167,7 @@ void PmergeMe::insertSortedDque(std::deque<std::pair<int, int> > *doubleDeque)
         for (int j = dist; j > 0; j--) {
             lastStartingIndex = dist + oldDist;
             int indexToInsert = j + oldDist;
-            if (j + oldDist < static_cast<int>((*doubleDeque).size() - 1)){
+            if (j + oldDist < static_cast<int>((*doubleDeque).size())){
                 int numberToInsert = (*doubleDeque)[indexToInsert].second;
                 std::deque<int>::iterator it = std::lower_bound(this->_dque.begin(), this->_dque.end(), numberToInsert);
                 this->_dque.insert(it, numberToInsert);

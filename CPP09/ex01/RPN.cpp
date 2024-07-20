@@ -2,12 +2,14 @@
 
 RPN::RPN()
 {
+    this->_result = 0;
     std::cout << BLACK << "| Def. C |" << RESET << std::endl;
 }
 
 RPN::RPN(const RPN &cpy)
 {
     (void)cpy;
+    this->_result = 0;
     std::cout << BLACK << "| Copy C |" << RESET << std::endl;
 }
 
@@ -28,9 +30,17 @@ bool RPN::isoperator(int token)
 
 void RPN::operation(int token)
 {
-    float second = this->_stack.top();
+    float second = 0;
+    if (!this->_stack.empty())
+        second = this->_stack.top();
+    else
+        throw RPNException("Error: Expression lacks numbers");
     this->_stack.pop();
-    float first = this->_stack.top();
+    float first = 0;
+    if (!this->_stack.empty())
+        first = this->_stack.top();
+    else
+        throw RPNException("Error: Expression lacks numbers");
     this->_stack.pop();
     switch (token)
     {
