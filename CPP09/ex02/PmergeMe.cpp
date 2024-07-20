@@ -119,22 +119,25 @@ void PmergeMe::insertSortedVec(std::vector<std::pair<int, int> > *doubleVec)
     int oldDist = 0;
     this->_vec.push_back((*doubleVec)[0].second);
     this->_vec.push_back((*doubleVec)[0].first);
-    for (size_t i = 1; i < doubleVec->size(); ++i)
+    for (size_t i = 1; i < doubleVec->size(); i++)
     {
         this->_vec.push_back((*doubleVec)[i].first);
     }
     // Iteration from the doubleVec
-    for (size_t i = 2; i < (*doubleVec).size(); i++) {
+    int lastStartingIndex = 0;
+    for (size_t i = 2; lastStartingIndex < static_cast<int>((*doubleVec).size()) - 1; i++) {
         int dist = std::abs(get_jacobsthalN(i) - get_jacobsthalN(i + 1));
         // Iteration from the distance with the jacobsthal
-        for (size_t j = 0 + dist; j > 0; j--) {
-            if (j + oldDist < (*doubleVec).size()) {
-                int numberToInsert = (*doubleVec)[j + oldDist].second;
+        for (int j = dist; j > 0; j--) {
+            lastStartingIndex = dist + oldDist;
+            int indexToInsert = j + oldDist;
+            if (j + oldDist < static_cast<int>((*doubleVec).size() - 1)){
+                int numberToInsert = (*doubleVec)[indexToInsert].second;
                 std::vector<int>::iterator it = std::lower_bound(this->_vec.begin(), this->_vec.end(), numberToInsert);
                 this->_vec.insert(it, numberToInsert);
             }
         }
-        oldDist = dist;
+        oldDist += dist;
     }
     int vecSize = this->_vec.size();
     if (this->_nArgs % 2 != 0) {
@@ -152,29 +155,32 @@ void PmergeMe::insertSortedDque(std::deque<std::pair<int, int> > *doubleDeque)
     int oldDist = 0;
     this->_dque.push_back((*doubleDeque)[0].second);
     this->_dque.push_back((*doubleDeque)[0].first);
-    for (size_t i = 1; i < doubleDeque->size(); ++i)
+    for (size_t i = 1; i < doubleDeque->size(); i++)
     {
         this->_dque.push_back((*doubleDeque)[i].first);
     }
     // Iteration from the doubleDeque
-    for (size_t i = 2; i < (*doubleDeque).size(); i++) {
+    int lastStartingIndex = 0;
+    for (size_t i = 2; lastStartingIndex < static_cast<int>((*doubleDeque).size()) - 1; i++) {
         int dist = std::abs(get_jacobsthalN(i) - get_jacobsthalN(i + 1));
         // Iteration from the distance with the jacobsthal
-        for (size_t j = 0 + dist; j > 0; j--) {
-            if (j + oldDist < (*doubleDeque).size()) {
-                int numberToInsert = (*doubleDeque)[j + oldDist].second;
-                 std::deque<int>::iterator it = std::lower_bound(this->_dque.begin(), this->_dque.end(), numberToInsert);
+        for (int j = dist; j > 0; j--) {
+            lastStartingIndex = dist + oldDist;
+            int indexToInsert = j + oldDist;
+            if (j + oldDist < static_cast<int>((*doubleDeque).size() - 1)){
+                int numberToInsert = (*doubleDeque)[indexToInsert].second;
+                std::deque<int>::iterator it = std::lower_bound(this->_dque.begin(), this->_dque.end(), numberToInsert);
                 this->_dque.insert(it, numberToInsert);
             }
         }
-        oldDist = dist;
+        oldDist += dist;
     }
-    int dqueSize = this->_dque.size();
+    int vecSize = this->_dque.size();
     if (this->_nArgs % 2 != 0) {
-        for (int i = 0; i < dqueSize; i++) {
+        for (int i = 0; i < vecSize; i++) {
             if (this->_oddArgVal < this->_dque[i]) {
                 this->_dque.insert(this->_dque.begin() + i, this->_oddArgVal);
-                i = dqueSize;
+                i = vecSize;
             }
         }
     }
