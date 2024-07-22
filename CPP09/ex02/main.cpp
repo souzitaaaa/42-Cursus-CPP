@@ -48,7 +48,7 @@ void check_input(std::vector<int> *arguments, int argc, char **argv)
 
 int main(int argc, char **argv)
 {
-    if (argc > 1)
+    if (argc > 2)
     {
         std::cout << YELLOW << "------------------PMERGEME------------------" << RESET << std::endl;
         try
@@ -72,6 +72,33 @@ int main(int argc, char **argv)
             printC(PmM.getDque());
             std::cout << "Time to process a range of " << YELLOW << argc - 1 << RESET << " elements with std::deque: ";
             std::cout << GREEN << static_cast<double>(end - begin) / 1000 << RESET << " ms\n";
+        }
+        catch (const std::exception &e)
+        {
+            std::cout << RED << e.what() << RESET << std::endl;
+        }
+    }
+    else if (argc == 2)
+    {
+        try
+        {
+        std::vector<int> arguments;
+        check_input(&arguments, argc, argv);
+        PmergeMe PmM(arguments);
+        std::cout << YELLOW << "Unsorted: " << RESET;
+        printC(arguments);
+        long long begin = currTime();
+        long long end = currTime();
+        std::cout << YELLOW << "Sorted with vector: " << RESET;
+        printC(PmM.getVec());
+        std::cout << "Time to process a range of " << YELLOW << argc - 1 << RESET << " elements with std::vector: ";
+        std::cout << GREEN << static_cast<double>(end - begin) / 1000 << RESET << " ms\n";
+        begin = currTime();
+        end = currTime();
+        std::cout << YELLOW << "Sorted with deque:  " << RESET;
+        printC(PmM.getDque());
+        std::cout << "Time to process a range of " << YELLOW << argc - 1 << RESET << " elements with std::deque: ";
+        std::cout << GREEN << static_cast<double>(end - begin) / 1000 << RESET << " ms\n";
         }
         catch (const std::exception &e)
         {
